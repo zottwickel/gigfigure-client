@@ -1,0 +1,10 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  text-decoration: none;
+}
+
+h1, h2 {
+  font-family: 'Major Mono Display', monospace;
+}
