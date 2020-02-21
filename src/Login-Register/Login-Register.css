@@ -1,0 +1,30 @@
+.lr_header {
+  margin-top: 50px;
+}
+
+.lr_form {
+  margin: 10px;
+  padding-left: 20px;
+}
+
+.lr_text {
+  margin: 10px 0 15px 0;
+  padding: 5px 10px;
+  font-size: 18px;
+}
+
+.lr_header {
+  margin-bottom: 20px;
+}
+
+.lr_button {
+  border: 1px solid black;
+  background-color: darkgreen;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+  margin-bottom: 50px;
+  margin-top: 25px;
+  font-size: 18px;
+  cursor: pointer;
+}

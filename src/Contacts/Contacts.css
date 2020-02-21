@@ -1,0 +1,56 @@
+.contact_folder {
+  padding: 20px;
+}
+
+.c_list {
+  padding: 0;
+}
+.c_item {
+  margin: 20px 0;
+  padding: 10px;
+  box-shadow: 2px 5px 10px -2px gray;
+  height: 96px;
+}
+
+.c_new {
+  margin: 10px;
+}
+
+.c_header {
+  margin-bottom: 20px;
+  margin-top: 50px;
+}
+
+.c_left {
+  float: left;
+}
+
+.c_right {
+  float: right;
+}
+
+.c_text {
+  margin: 10px 0 15px 0;
+  padding: 5px 10px;
+  font-size: 18px;
+}
+
+.c_button {
+  border: 1px solid black;
+  background-color: darkgreen;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+  margin-top: 25px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.form_toggle {
+  border: none;
+  background: none;
+  color: green;
+  font-size: 18px;
+  margin-top: 30px;
+  cursor: pointer;
+}

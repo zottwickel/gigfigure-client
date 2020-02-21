@@ -1,0 +1,78 @@
+.nav_box {
+  background: rgb(0,0,0);
+  padding: 5px 0 5px 0;
+}
+
+.nav_title {
+  font-size: 40px;
+  margin: 20px 0 10px 10px;
+}
+
+.logins_box {
+  padding: 10px 0 0 10px;
+}
+
+.nav_capt {
+  font-size: 18px;
+  margin: 0 0 15px 10px;
+  color: limegreen;
+}
+
+.inactive {
+  background-color: lightgreen;
+}
+
+.nav_cases_tab, .nav_contacts_tab {
+  padding: 5px 15px 5px 15px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  color: black;
+}
+
+.nav_cases_tab {
+  margin-left: 20px;
+}
+
+.nav_contacts_tab {
+  margin-left: 10px;
+}
+
+.login_button, .logout_button {
+  border: 1px solid limegreen;
+  background-color: lightgreen;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.register_button {
+  border: none;
+  background-color: rgb(0,0,0,0);
+  font-size: 16px;
+  color: lightgreen;
+  cursor: pointer;
+}
+
+.active {
+  background-color: white;
+}
+
+.nav_title {
+  color: white;
+}
+
+.nav_capt {
+  color: white;
+}
+
+@media only screen and (min-width: 768px) {
+  .nav_box {
+    background: linear-gradient(25deg,rgba(0,0,0,1) 33%, rgba(0,255,0,1) 100%);
+  }
+  .nav_title {
+    margin-top: 50px;
+  }
+  .nav_capt {
+    margin-bottom: 50px;
+  }
+}

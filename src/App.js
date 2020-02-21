@@ -1,5 +1,12 @@
-import React from 'react';
+import React from 'react'
+import { Switch, Route } from 'react-router-dom'
 import Nav from './Nav/Nav'
+import Home from './Home/Home'
+import Contacts from './Contacts/Contacts'
+import Cases from './Cases/Cases'
+import Case from './Case/Case'
+import Foot from './Foot/Foot'
+import { Login, Register } from './Login-Register/Login-Register'
 import './App.css';
 
 class App extends React.Component {
@@ -7,12 +14,56 @@ class App extends React.Component {
     super(props)
     this.state = {
       isLoggedIn: false,
+      activeTab: 'none',
+      toggleLogin: () => {
+        this.setState({
+          isLoggedIn: !this.state.isLoggedIn,
+        })
+      },
+      setActiveTab: (tab) => {
+        this.setState({
+          activeTab: tab
+        })
+      }
     }
   }
   render() {
     return (
       <div className="App">
-        <Nav isLoggedIn={false} />
+        <Nav {...this.state} />
+        <Switch>
+          <Route
+            exact path='/'
+            render={props => <Home {...props} {...this.state} />
+            }
+          />
+          <Route
+            exact path='/contacts'
+            render={props => <Contacts {...props} {...this.state} />}
+          />
+          <Route
+            exact path='/cases'
+            render={props => <Cases {...props} {...this.state} />}
+          />
+          <Route
+            exact path='/cases/case'
+            render={props => 
+              <>
+               <Case {...props} {...this.state} />
+               <Cases {...props} {...this.state} />
+              </>
+            }
+          />
+          <Route
+            exact path='/login'
+            render={props => <Login {...props} {...this.state} />}
+          />
+          <Route
+            exact path='/register'
+            render={props => <Register {...props} {...this.state} />}
+          />
+        </Switch>
+        <Foot />
       </div>
     )
   }
