@@ -15,7 +15,6 @@ class Case extends React.Component {
     CasesApiService.getCases()
       .then(this.context.setCases)
       .catch(this.context.setError)
-    window.scrollTo(0,0)
   }
 
   render() {

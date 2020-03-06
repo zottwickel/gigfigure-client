@@ -3,6 +3,7 @@ import { Route, Link, Redirect } from 'react-router-dom'
 import LoginContext from '../contexts/LoginContext'
 import CasesContext from '../contexts/CasesContext'
 import CasesApiService from '../services/cases-api-service'
+import ContactsApiService from '../services/contacts-api-service'
 import formatDate from '../services/format-date'
 import Loading from '../Util/Loading'
 import Case from './Case/Case'
@@ -19,6 +20,12 @@ class Cases extends React.Component {
       this.context.clearError()
       CasesApiService.getCases()
         .then(this.context.setCases)
+        .catch(this.context.setError)
+    }
+    this.callContacts = () => {
+      this.context.clearError()
+      ContactsApiService.getContacts()
+        .then(this.context.setContacts)
         .catch(this.context.setError)
     }
   }
@@ -50,14 +57,15 @@ class Cases extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this.props.setActiveTab('cases')
-    this.callCases()
+  scrollWindow(e) {
+    e.preventDefault()
     window.scrollTo(0, 0)
   }
 
-  componentDidUpdate() {
-    window.scrollTo(0, 0)
+  componentDidMount() {
+    this.props.setActiveTab('cases')
+    this.callCases()
+    this.callContacts()
   }
 
   componentWillUnmount() {
@@ -65,18 +73,20 @@ class Cases extends React.Component {
   }
 
   render() {
+    
     const contactComp = []
     for (let i=0; i < this.state.contacts; i++) {
       contactComp.push(
-        <>
+        <div key={i}>
           <select className='c_text' id='name' name='name' type='text' placeholder='Contact Name' >
             <option value='null'>{'->Choose One<-'}</option>
-            <option value='Contact One'>Contact One</option>
-            <option value='Contact Two'>Contact Two</option>
-            <option value='Contact Three'>Contact Three</option>
-            <option value='Contact Four'>Contact Four</option>
+            {(this.context.contacts.length > 0 && this.context.contacts[0] !== null) ? this.context.contacts.map(contact => {
+              return (
+                <option key={contact.contact_id} value={contact.contact_id}>{contact.name}</option>
+              )
+            }) : null}
           </select><br />
-        </>
+        </div>
       )
     }
     return(
@@ -108,13 +118,16 @@ class Cases extends React.Component {
         </>
         : null }
         <h3 className='c_header'>Your Cases</h3>
-        { (this.context.cases.length === 0) ? <Loading /> : null}
+        { (this.context.cases.length === 0) ? <Loading /> : null }
+        { (this.context.cases[0] === null) ? <p>You have no cases yet.</p> :
         <ul className='c_list'>
           {this.context.cases.map(singleCase => {
             return (
               <li key={singleCase.case_id} className='ca_item'>
                 <div>
-                  <Link to={`/cases/${singleCase.case_id}`} ><h3 className='ca_header'>{`Case ${singleCase.case_id}`}</h3></Link>
+                  <button onClick={e => this.scrollWindow(e)} className='ca_header_button'>
+                    <Link to={`/cases/${singleCase.case_id}`} >{`Case ${singleCase.case_id}`}</Link>
+                  </button>
                   <h4 className='ca_subheading'>Notes:</h4>
                   <p className='ca_notes'>{singleCase.case_notes.substring(0,50) + '...'}</p>
                   <h4 className='ca_subheading'>Date:</h4>
@@ -135,6 +148,7 @@ class Cases extends React.Component {
             )
           })}
         </ul>
+        }
       </div>
     )
   }

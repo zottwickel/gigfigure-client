@@ -1,6 +1,8 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 import LoginContext from '../contexts/LoginContext'
+import CasesContext from '../contexts/CasesContext'
+import ContactsApiService from '../services/contacts-api-service'
 import './Contacts.css'
 
 class Contacts extends React.Component {
@@ -9,10 +11,19 @@ class Contacts extends React.Component {
     this.state = {
       form: false
     }
+    this.callContacts = () => {
+      this.context.clearError()
+      ContactsApiService.getContacts()
+        .then(this.context.setContacts)
+        .catch(this.context.setError)
+    }
   }
+
+  static contextType = CasesContext
 
   componentDidMount() {
     this.props.setActiveTab('contacts')
+    this.callContacts() 
   }
 
   componentWillUnmount() {
@@ -55,36 +66,20 @@ class Contacts extends React.Component {
           </form>
         </>
         : null }
+        
         <h3 className='c_header'>Your contacts</h3>
         <ul className='c_list'>
-          <li className='c_item'>
-              <h4 className='c_center'>Contact One</h4>
-              <p className='c_left'>Musician</p>
-              <p className='c_right'>Drums</p><br />
-              <p className='c_left'><a href='tel:555-555-5555'>555-555-5555</a></p>
-              <p className='c_right'><a href='mailto:contactone@gigfigure.com'>contactone@gigfigure.com</a></p><br />
-          </li>
-          <li className='c_item'>
-            <h4 className='c_center'>Contact Two</h4>
-            <p className='c_left'>Booker</p>
-            <p className='c_right'>Bar One</p><br />
-            <p className='c_left'><a href='tel:555-555-5555'>555-555-5555</a></p>
-            <p className='c_right'><a href='mailto:contacttwo@gigfigure.com'>contacttwo@gigfigure.com</a></p><br />
-          </li>
-          <li className='c_item'>
-            <h4 className='c_center'>Contact Three</h4>
-            <p className='c_left'>Festival</p>
-            <p className='c_right'>Info Line</p><br />
-            <p className='c_left'><a href='tel:555-555-5555'>555-555-5555</a></p>
-            <p className='c_right'><a href='mailto:contactthree@gigfigure.com'>contactthree@gigfigure.com</a></p><br />
-          </li>
-          <li className='c_item'>
-            <h4 className='c_center'>Contact Four</h4>
-            <p className='c_left'>Supporter</p>
-            <p className='c_right'>Media Shop One</p><br />
-            <p className='c_left'><a href='tel:555-555-5555'>555-555-5555</a></p>
-            <p className='c_right'><a href='mailto:contactfour@gigfigure.com'>contactfour@gigfigure.com</a></p><br />
-          </li>
+          {this.context.contacts.map(contact => {
+            return (
+              <li key={contact.contact_id} className='c_item'>
+                <h4>{contact.name}</h4>
+                <p className='c_left'>{contact.type}</p>
+                <p className='c_right'>{contact.subtype}</p><br />
+                <p className='c_left'><a href={`tel:${contact.phone}`}>{contact.phone}</a></p>
+                <p className='c_right'><a href={`mailto:${contact.email}`}>{contact.email}</a></p><br />
+              </li>
+            )
+          })}
         </ul>
       </div>
     )

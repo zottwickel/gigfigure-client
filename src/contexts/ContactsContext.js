@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 const ContactsContext = React.createContext({
-  cases: [],
+  contacts: [],
   error: null,
   setError: () => {},
   clearError: () => {},

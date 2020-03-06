@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 const CasesContext = React.createContext({
   cases: [],
+  contacts: [],
   error: null,
   setError: () => {},
   clearError: () => {},
@@ -13,6 +14,7 @@ export default CasesContext
 export class CasesProvider extends Component {
   state = {
     cases: [],
+    contacts: [],
     error: null
   }
 
@@ -29,13 +31,19 @@ export class CasesProvider extends Component {
     this.setState({ cases })
   }
 
+  setContacts = (contacts) => {
+    this.setState({ contacts })
+  }
+
   render() {
     const value = {
       cases: this.state.cases,
+      contacts: this.state.contacts,
       error: this.state.error,
       setError: this.setError,
       clearError: this.clearError,
-      setCases: this.setCases
+      setCases: this.setCases,
+      setContacts: this.setContacts
     }
     return (
       <CasesContext.Provider value={value}>

@@ -29,7 +29,7 @@ function handleRegister(e, context) {
   e.persist()
   const { user_name, password, email } = e.target
 
-  context.ClearError()
+  //context.ClearError()
   AuthApiService.postUser({
     user_name: user_name.value,
     password: password.value,
@@ -72,8 +72,8 @@ export function Register(props) {
           {context.isLoggedIn ? <Redirect to='/' /> :
           <><h3 className='lr_header'>Register to use the app.</h3>
           <form onSubmit={e => handleRegister(e, context)} >
-            <label className='lr_label' htmlFor='name' >Name</label><br />
-            <input className='lr_text' type='text' id='name' name='name' placeholder='Your name here' required /><br />
+            <label className='lr_label' htmlFor='user_name' >Name</label><br />
+            <input className='lr_text' type='text' id='user_name' name='user_name' placeholder='Your name here' required /><br />
             <label className='lr_label' htmlFor='email' >Email</label><br />
             <input className='lr_text' type='email' id='email' name='email' placeholder='Your email here' required  /><br />
             <label className='lr_label' htmlFor='password' >Password</label><br />
