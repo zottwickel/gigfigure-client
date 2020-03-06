@@ -1,0 +1,22 @@
+.ca_box {
+  padding: 20px;
+}
+
+.ca_subheading {
+  margin-top: 20px;
+}
+
+.ca_co_item {
+  border: 1px solid lightgray;
+  padding: 20px;
+  margin-bottom: 20px;
+  overFlow-x: auto;
+}
+
+.ca_co_list {
+  padding: 0;
+}
+
+.ca_box {
+  padding: 0;
+}

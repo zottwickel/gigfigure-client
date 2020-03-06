@@ -4,8 +4,8 @@ import Nav from './Nav/Nav'
 import Home from './Home/Home'
 import Contacts from './Contacts/Contacts'
 import Cases from './Cases/Cases'
-import Case from './Case/Case'
 import Foot from './Foot/Foot'
+import LoginContext from './contexts/LoginContext'
 import { Login, Register } from './Login-Register/Login-Register'
 import './App.css';
 
@@ -27,6 +27,11 @@ class App extends React.Component {
       }
     }
   }
+
+  static contextType = LoginContext
+  componentDidMount() {
+    this.context.setSession()
+  }
   render() {
     return (
       <div className="App">
@@ -42,17 +47,8 @@ class App extends React.Component {
             render={props => <Contacts {...props} {...this.state} />}
           />
           <Route
-            exact path='/cases'
+            path='/cases'
             render={props => <Cases {...props} {...this.state} />}
-          />
-          <Route
-            exact path='/cases/case'
-            render={props => 
-              <>
-               <Case {...props} {...this.state} />
-               <Cases {...props} {...this.state} />
-              </>
-            }
           />
           <Route
             exact path='/login'

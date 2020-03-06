@@ -1,3 +1,4 @@
 export default {
-  SOME_CONFIG_KEY: 'Some config value',
+  API_ENDPOINT: 'http://localhost:8000/api',
+  TOKEN_KEY: 'auth-token',
 }

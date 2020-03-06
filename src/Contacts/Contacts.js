@@ -1,5 +1,6 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
+import LoginContext from '../contexts/LoginContext'
 import './Contacts.css'
 
 class Contacts extends React.Component {
@@ -28,7 +29,13 @@ class Contacts extends React.Component {
   render() {
     return( 
       <div className='contact_folder'>
-        {!this.props.isLoggedIn ? <Redirect to='/login' /> : null }
+        <LoginContext.Consumer>
+          {loginContext => { return(
+            <>
+              {!loginContext.isLoggedIn ? <Redirect to='/login' /> : null }
+            </>
+          )}}
+        </LoginContext.Consumer>
         <button className='form_toggle' onClick={e => this.toggleForm(e)}>{!this.state.form ? 'Add New Contact' : 'Close Form'}</button>
         { this.state.form ?
         <>
