@@ -1,6 +1,7 @@
 .h_box {
   padding: 10px 20px 100px 20px;
   background-color: white;
+  height: 100%;
 }
 
 .h_header {

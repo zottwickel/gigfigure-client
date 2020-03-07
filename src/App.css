@@ -1,0 +1,15 @@
+.wrapper {
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  perspective: 2px;
+}
+
+.switch {
+  position: relative;
+}
+
+.shoe {
+  height: 200%;
+  background-color: black;
+}

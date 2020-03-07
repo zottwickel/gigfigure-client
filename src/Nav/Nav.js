@@ -17,7 +17,7 @@ export default function Nav(props) {
   return (
     <LoginContext.Consumer>
       {context => { return (
-        <div className='nav_box'>
+        <div className='nav_box parallax bkd1'>
           <nav>
             {
             context.isLoggedIn

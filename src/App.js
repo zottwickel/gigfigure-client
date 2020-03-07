@@ -34,32 +34,35 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div className="App">
+      <div className="App wrapper">
         <Nav {...this.state} />
-        <Switch>
-          <Route
-            exact path='/'
-            render={props => <Home {...props} {...this.state} />
-            }
-          />
-          <Route
-            exact path='/contacts'
-            render={props => <Contacts {...props} {...this.state} />}
-          />
-          <Route
-            path='/cases'
-            render={props => <Cases {...props} {...this.state} />}
-          />
-          <Route
-            exact path='/login'
-            render={props => <Login {...props} {...this.state} />}
-          />
-          <Route
-            exact path='/register'
-            render={props => <Register {...props} {...this.state} />}
-          />
-        </Switch>
+        <div className='switch'>
+          <Switch>
+            <Route
+              exact path='/'
+              render={props => <Home {...props} {...this.state} />
+              }
+            />
+            <Route
+              exact path='/contacts'
+              render={props => <Contacts {...props} {...this.state} />}
+            />
+            <Route
+              path='/cases'
+              render={props => <Cases {...props} {...this.state} />}
+            />
+            <Route
+              exact path='/login'
+              render={props => <Login {...props} {...this.state} />}
+            />
+            <Route
+              exact path='/register'
+              render={props => <Register {...props} {...this.state} />}
+            />
+          </Switch>
+        </div>
         <Foot />
+        <div className='shoe'></div>
       </div>
     )
   }

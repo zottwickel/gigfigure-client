@@ -3,8 +3,11 @@
 }
 
 .lr_form {
-  margin: 10px;
+  margin: 0px;
   padding-left: 20px;
+  background-color: white;
+  padding-top: 15px;
+  margin-top: 0px;
 }
 
 .lr_text {

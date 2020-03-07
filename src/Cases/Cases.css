@@ -1,4 +1,8 @@
-.c_area {
+.contact_folder {
+  background-color: white;
+}
+
+c_area {
   width: 100%;
   resize: vertical;
 }

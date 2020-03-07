@@ -1,6 +1,23 @@
 .nav_box {
-  background: rgb(0,0,0);
+  position: relative;
   padding: 5px 0 5px 0;
+}
+
+.parallax::after {
+  content: ' ';
+  position: absolute;
+  top: -200px;
+  right: 0;
+  bottom: -100vh;
+  left: -20px;
+  transform: translateZ(-1px) scale(1.5);
+  background-size: 100%;
+  z-index: -1;
+}
+
+.bkd1::after {
+  background-image: url('../images//spiral.jpg');
+  background-repeat: none;
 }
 
 .nav_title {
@@ -66,9 +83,7 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .nav_box {
-    background: linear-gradient(25deg,rgba(0,0,0,1) 33%, rgba(0,255,0,1) 100%);
-  }
+
   .nav_title {
     margin-top: 50px;
   }
