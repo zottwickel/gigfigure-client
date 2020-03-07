@@ -14,7 +14,9 @@ class Cases extends React.Component {
     super(props)
     this.state = {
       form: false,
-      contacts: 1
+      contacts: 1,
+      notes: null,
+      disabled: true
     }
     this.callCases = () => {
       this.context.clearError()
@@ -72,13 +74,90 @@ class Cases extends React.Component {
     this.props.setActiveTab('none')
   }
 
+  validateNotes(e) {
+    e.preventDefault()
+    const valNotes = e.target.value
+    if (valNotes.length < 5 || valNotes.length > 500) {
+      this.setState({
+        notes: 'Please keep notes between 5 and 500 characters long.',
+        disabled: true
+      })
+    } else {
+      this.setState({
+        notes: undefined,
+        disabled: false
+      })
+    }
+  }
+
+  handleNewCase(e, numContacts) {
+    e.preventDefault()
+    e.persist()
+    const notes = e.target.notes.value
+    const contactArr= []
+    switch (numContacts) {
+      case 1:
+        contactArr.push({
+          contact_id: e.target.sel0.value
+        })
+      break
+      case 2:
+        contactArr.push({
+          contact_id: e.target.sel0.value
+        },{
+          contact_id: e.target.sel1.value
+        })
+      break
+      case 3:
+        contactArr.push({
+          contact_id: e.target.sel0.value
+        }, {
+          contact_id: e.target.sel1.value
+        }, {
+          contact_id: e.target.sel2.value
+        })
+      break
+      case 4:
+        contactArr.push({
+          contact_id: e.target.sel0.value
+        }, {
+          contact_id: e.target.sel1.value
+        }, {
+          contact_id: e.target.sel2.value
+        }, {
+          contact_id: e.target.sel3.value
+        })
+      break
+      case 5:
+        contactArr.push({
+          contact_id: e.target.sel0.value
+        }, {
+          contact_id: e.target.sel1.value
+        }, {
+          contact_id: e.target.sel2.value
+        }, {
+          contact_id: e.target.sel3.value
+        }, {
+          contact_id: e.target.sel4.value
+        })
+      break
+      default:
+      break
+    }
+    e.target.notes.value = ''
+    CasesApiService.postCase(notes, contactArr)
+      .then(this.callCases)
+      .then(this.toggleForm(e))
+      .catch(this.context.setError)
+  }
+
   render() {
     
     const contactComp = []
     for (let i=0; i < this.state.contacts; i++) {
       contactComp.push(
-        <div key={i}>
-          <select className='c_text' id='name' name='name' type='text' placeholder='Contact Name' >
+        <div key={i.toString()}>
+          <select className='c_text' id={'sel' + i} name='name' type='text' placeholder='Contact Name' >
             <option value='null'>{'->Choose One<-'}</option>
             {(this.context.contacts.length > 0 && this.context.contacts[0] !== null) ? this.context.contacts.map(contact => {
               return (
@@ -106,14 +185,15 @@ class Cases extends React.Component {
         { this.state.form ?
         <>
           <h3 className='c_header'>New Case</h3>
-          <form className='c_new'>
+          <form className='c_new' onSubmit={e => this.handleNewCase(e, contactComp.length)}>
             <p className='c_label'>Contacts</p>
             {contactComp.map(el => el)}
             <button className='c_add' onClick={e => this.addContactDropdown(e)}>More</button>
             <button className='c_min' onClick={e => this.removeContactDropdown(e)}>Less</button><br />
             <label className='c_label' htmlFor='notes'>Case Notes</label><br />
-            <textarea className='c_text c_area' id='notes' name='notes' placeholder='Called "so and so" and planned "such and such".'></textarea><br />
-            <button type='submit' className='c_button' onClick={e => e.preventDefault()}>Save Case</button>
+            {(this.state.notes) ? <p className='c_val'>{this.state.notes}</p> : null}
+            <textarea className='c_text c_area' id='notes' name='notes' placeholder='Called "so and so" and planned "such and such".' onChange={e => this.validateNotes(e)}></textarea><br />
+            <button type='submit' className={(this.state.disabled) ? 'c_button_dis' : 'c_button'} disabled={this.state.disabled}>Save Case</button>
           </form>
         </>
         : null }

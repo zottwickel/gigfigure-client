@@ -22,10 +22,10 @@ const CasesApiService = {
         'Authorization': `bearer ${TokenService.getAuthToken()}`,
         'content-type': 'application/json',
       },
-      body: {
-        notes: notes,
+      body: JSON.stringify({
+        case_notes: notes,
         contacts: contacts
-      }
+      })
     })
       .then(res =>
         (!res.ok)

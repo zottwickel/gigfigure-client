@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
 import LoginContext from '../contexts/LoginContext'
 import TokenService from '../services/token-service'
@@ -29,7 +29,7 @@ function handleRegister(e, context) {
   e.persist()
   const { user_name, password, email } = e.target
 
-  //context.ClearError()
+  context.clearError()
   AuthApiService.postUser({
     user_name: user_name.value,
     password: password.value,
@@ -55,6 +55,7 @@ export function Login(props) {
             <input className='lr_text' type='email' id='email' name='email' placeholder='Your email here' /><br />
             <label className='lr_label' htmlFor='password' >Password</label><br />
             <input className='lr_text' type='password' id='password' name='password' placeholder='Your password here' /><br />
+            {(context.error) ? <p className='c_val'>{context.error.message}</p> : null}
             <button className='lr_button' type='submit'>Login</button>
           </form></>}
         </div>
@@ -64,7 +65,52 @@ export function Login(props) {
 }
 
 export function Register(props) {
-
+  function validateUserName(e) {
+    if (e.target.value.length > 50 || e.target.value.length < 1 ) {
+      setUserName('Screen Name must be between 1 and 50 characters long')
+    } else {
+      setUserName(null)
+    }
+  }
+  function validateEmail(e) {
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    if (!emailRegex.test(e.target.value)) {
+      setEmail('Email must be valid')
+    } else {
+      setEmail(null)
+    }
+  }
+  function validatePassword(e) {
+    const passwordRegex = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&])[\S]+/
+    const newPassword = e.target.value
+    if (newPassword.length < 8) {
+      setPassword('Password must be longer than 8 characters')
+    } else if (newPassword.length > 72) {
+      setPassword('Password must be less than 72 characters')
+    } else if (newPassword.startsWith(' ') || newPassword.endsWith(' ')) {
+      setPassword('Password must not start or end with empty spaces')
+    } else if (!passwordRegex.test(newPassword)) {
+      setPassword('Password must contain 1 upper case, lower case, number and special character')
+    } else {
+      setPassword(null)
+      setPasswordValue(newPassword)
+    }
+  }
+  function checkPasswordMatch(e) {
+    const confirmPassword = e.target.value
+    if (confirmPassword !== passwordValue) {
+      setMatchPassword('Passwords must match')
+    } else {
+      setMatchPassword(null)
+      setValidated(true)
+    }
+  }
+  let [user_name, setUserName] = useState(null)
+  let [email, setEmail] = useState(null)
+  let [password, setPassword] = useState(null)
+  let [passwordValue, setPasswordValue] = useState(null)
+  let [matchPassword, setMatchPassword] = useState(null)
+  let [validated, setValidated] = useState(false)
   return (
     <LoginContext.Consumer>
       {context => {return (
@@ -73,14 +119,19 @@ export function Register(props) {
           <><h3 className='lr_header'>Register to use the app.</h3>
           <form onSubmit={e => handleRegister(e, context)} >
             <label className='lr_label' htmlFor='user_name' >Name</label><br />
-            <input className='lr_text' type='text' id='user_name' name='user_name' placeholder='Your name here' required /><br />
+            {user_name ? <p className='c_val'>{user_name}</p> : null }
+            <input className='lr_text' type='text' id='user_name' name='user_name' placeholder='Your name here' required onChange={e => validateUserName(e)} /><br />
             <label className='lr_label' htmlFor='email' >Email</label><br />
-            <input className='lr_text' type='email' id='email' name='email' placeholder='Your email here' required  /><br />
+            {email ? <p className='c_val'>{email}</p> : null }
+            <input className='lr_text' type='email' id='email' name='email' placeholder='Your email here' required onChange={e => validateEmail(e)} /><br />
             <label className='lr_label' htmlFor='password' >Password</label><br />
-            <input className='lr_text' type='password' id='password' name='password' placeholder='Your password here' required /><br />
+            {password ? <p className='c_val'>{password}</p> : null }
+            <input className='lr_text' type='password' id='password' name='password' placeholder='Your password here' required onChange={e => validatePassword(e)} /><br />
             <label className='lr_label' htmlFor='conf_password' >Confirm Password</label><br />
-            <input className='lr_text' type='password' id='conf_password' name='conf_password' placeholder='Retype password' required /><br />
-            <button className='lr_button' type='submit'>Register</button>
+            {matchPassword ? <p className='c_val'>{matchPassword}</p> : null }<br />
+            <input className='lr_text' type='password' id='conf_password' name='conf_password' placeholder='Retype password' required onChange={e => checkPasswordMatch(e)} /><br />
+            {(context.error) ? <p className='c_val'>{context.error}</p> : null}
+            <button className='lr_button' type='submit' disabled={!validated}>Register</button>
           </form></>}
         </div>
     )}}
