@@ -1,15 +1,8 @@
 .footer {
   padding: 30px;
   text-align: right;
-  height: 133px;
+  background: black;
 }
-
-.bkd::after {
-  background-image: url('../images//spiral.jpg');
-  left: -500px;
-  right: -500px;
-}
-
 
 .footitem {
   color: white;

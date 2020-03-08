@@ -6,9 +6,9 @@
 .parallax::after {
   content: ' ';
   position: absolute;
-  top: -200px;
+  top: -100px;
   right: 0;
-  bottom: -100vh;
+  bottom: 0;
   left: -20px;
   transform: translateZ(-1px) scale(1.5);
   background-size: 100%;
@@ -89,5 +89,9 @@
   }
   .nav_capt {
     margin-bottom: 50px;
+  }
+
+  .parallax::after {
+    top: -250px;
   }
 }
