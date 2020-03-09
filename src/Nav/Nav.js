@@ -15,11 +15,10 @@ export default function Nav(props) {
   const activeTab = props.activeTab
 
   return (
-    <LoginContext.Consumer>
-      {context => { return (
         <div className='nav_box parallax bkd1'>
           <nav>
-            {
+          <LoginContext.Consumer>
+          {context => { return (
             context.isLoggedIn
             ? <div className='logins_box'>
                 <button className='logout_button' onClick={e => handleLogout(e, context)}>Logout</button>
@@ -28,16 +27,30 @@ export default function Nav(props) {
                 <Link to={'/login'}><button className='login_button'>Login</button></Link>
                 <Link to={'/register'}><button className='register_button'>Register</button></Link>
               </div>
-            }
+            )
+          }}
+          </LoginContext.Consumer>
             <Link to={'/'}><h1 className='nav_title'>Gig Figure</h1></Link>
             <h2 className='nav_capt'>your gigs - remembered</h2>
+            <LoginContext.Consumer>
+            {context => { return (
             <div className='tab_box'>
-              <Link to={'/cases'}><span className={`nav_cases_tab ${activeTab === 'cases' ? 'active' : 'inactive'}`}>Cases</span></Link>
-              <Link to={'/contacts'}><span className={`nav_contacts_tab ${activeTab === 'contacts' ? 'active' : 'inactive'}`}>Contacts</span></Link>
+              { context.isLoggedIn
+                ? 
+                <>
+                  <Link to={'/cases'}><span className={`nav_cases_tab ${activeTab === 'cases' ? 'active' : 'inactive'}`}>Cases</span></Link>
+                  <Link to={'/contacts'}><span className={`nav_contacts_tab ${activeTab === 'contacts' ? 'active' : 'inactive'}`}>Contacts</span></Link>
+                </>
+                :
+                <>
+                  <Link to={'/login'}><span className={`nav_cases_tab ${activeTab === 'cases' ? 'active' : 'inactive'}`}>Cases</span></Link>
+                  <Link to={'/login'}><span className={`nav_contacts_tab ${activeTab === 'contacts' ? 'active' : 'inactive'}`}>Contacts</span></Link>
+                </>
+              }
             </div>
+            )}}
+            </LoginContext.Consumer>
           </nav>
         </div>
-      )}}
-    </LoginContext.Consumer>
   )
 }

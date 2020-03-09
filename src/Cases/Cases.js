@@ -157,8 +157,8 @@ class Cases extends React.Component {
     for (let i=0; i < this.state.contacts; i++) {
       contactComp.push(
         <div key={i.toString()}>
-          <select className='c_text' id={'sel' + i} name='name' type='text' placeholder='Contact Name' >
-            <option value='null'>{'->Choose One<-'}</option>
+          <select className='c_text' id={'sel' + i} name='name' type='text' placeholder='Contact Name' required>
+            <option value=''>{'->Choose One<-'}</option>
             {(this.context.contacts.length > 0 && this.context.contacts[0] !== null) ? this.context.contacts.map(contact => {
               return (
                 <option key={contact.contact_id} value={contact.contact_id}>{contact.name}</option>
@@ -214,9 +214,9 @@ class Cases extends React.Component {
                   <p className='ca_notes'>{formatDate(singleCase.date)}</p>
                   <h4 className='ca_subheading'>Contacts:</h4>
                   <ul>
-                    {singleCase.contacts.map(contact => {
+                    {singleCase.contacts.map((contact, i) => {
                       return(
-                        <li key={contact.contact_id}>
+                        <li key={contact.contact_id + i}>
                           <p>{contact.name}</p>
                         </li>
                       )

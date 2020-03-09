@@ -52,20 +52,14 @@ class Contacts extends React.Component {
         })
       } else {
         this.setState({
-          name: undefined,
+          name: undefined
         })
       }
-      this.validateType()
-    } else if (this.state.name === undefined && this.state.type === undefined) {
-      this.setState({
-        disabled: false
-      })
     }
   }
 
   validateType(e) {
     if (e) {
-      e.preventDefault()
       let valType = e.target.value
       if (valType.length < 4 || valType.length > 50) {
         this.setState({
@@ -76,14 +70,10 @@ class Contacts extends React.Component {
         })
       } else {
         this.setState({
-          type: undefined
+          type: undefined,
+          disabled: false
         })
       }
-      this.validateName()
-    } else if (this.state.name === undefined && this.state.type === undefined) {
-      this.setState({
-        disabled: false
-      })
     }
   }
 

@@ -55,7 +55,7 @@ export function Login(props) {
             <input className='lr_text' type='email' id='email' name='email' placeholder='Your email here' /><br />
             <label className='lr_label' htmlFor='password' >Password</label><br />
             <input className='lr_text' type='password' id='password' name='password' placeholder='Your password here' /><br />
-            {(context.error) ? <p className='c_val'>{context.error.message}</p> : null}
+            {(context.error) ? <p className='c_val'>{context.error}</p> : null}
             <button className='lr_button' type='submit'>Login</button>
           </form></>}
         </div>
