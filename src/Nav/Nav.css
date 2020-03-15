@@ -37,6 +37,13 @@
 
 .inactive {
   background-color: lightgreen;
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+}
+
+.inactive:hover {
+  background-color: limegreen;
 }
 
 .nav_cases_tab, .nav_contacts_tab {
@@ -52,6 +59,9 @@
 
 .nav_contacts_tab {
   margin-left: 10px;
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
 }
 
 .login_button, .logout_button {
@@ -60,6 +70,13 @@
   border-radius: 3px;
   cursor: pointer;
   font-size: 16px;
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+}
+
+.login_button:hover, .logout_button:hover {
+  background-color: limegreen;
 }
 
 .register_button {
@@ -68,6 +85,13 @@
   font-size: 16px;
   color: lightgreen;
   cursor: pointer;
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+}
+
+.register_button:hover {
+  color: limegreen;
 }
 
 .active {
@@ -76,10 +100,22 @@
 
 .nav_title {
   color: white;
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+}
+
+.nav_title:hover {
+  color: limegreen
 }
 
 .nav_capt {
   color: white;
+}
+
+.l_text {
+  color: white;
+  margin-right: 10px;
 }
 
 @media only screen and (min-width: 768px) {

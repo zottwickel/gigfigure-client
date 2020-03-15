@@ -1,28 +1,10 @@
 import React, { useState } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import LoginContext from '../contexts/LoginContext'
 import TokenService from '../services/token-service'
 import AuthApiService from '../services/auth-api-service'
+import Loading from '../Util/Loading'
 import './Login-Register.css'
-
-function handleLogin(e, context) {
-  e.preventDefault()
-  e.persist()
-  const { email, password } = e.target
-
-  context.clearError()
-  AuthApiService.postLogin({
-    email: email.value,
-    password: password.value
-  })
-    .then(res => {
-      TokenService.saveAuthToken(res.authToken, res.user_id)
-      context.beginSession()
-    })
-    .catch(res => {
-      context.setError(res.error)
-    })
-}
 
 function handleRegister(e, context) {
   e.preventDefault()
@@ -36,7 +18,17 @@ function handleRegister(e, context) {
     email: email.value
   })
     .then(user => {
-      handleLogin(e, context)
+      AuthApiService.postLogin({
+        email: email.value,
+        password: password.value
+      })
+        .then(res => {
+          TokenService.saveAuthToken(res.authToken, res.user_id)
+          context.beginSession()
+        })
+        .catch(res => {
+          context.setError(res.error)
+        })
     })
     .catch(res => {
       context.setError(res.error)
@@ -44,19 +36,53 @@ function handleRegister(e, context) {
 }
 
 export function Login(props) {
+  function submitLoad() {
+    setDisabled(true)
+    setLoading(true)
+  }
+
+  function handleLogin(e, context) {
+    e.preventDefault()
+    e.persist()
+    const { email, password } = e.target
+  
+    context.clearError()
+    AuthApiService.postLogin({
+      email: email.value,
+      password: password.value
+    })
+      .then(res => {
+        TokenService.saveAuthToken(res.authToken, res.user_id)
+        context.beginSession()
+      })
+      .catch(res => {
+        context.setError(res.error)
+        setDisabled(false)
+        setLoading(false)
+      })
+  }
+  let [loading, setLoading] = useState(false)
+  let [disabled, setDisabled] = useState(false)
   return (
     <LoginContext.Consumer>
       {context => { return (
         <div className='lr_form'>
           {(context.isLoggedIn || context.login)? <Redirect to='/' /> :
-          <><h3 className='lr_header'>Log in to use the app.</h3>
-          <form onSubmit={e => handleLogin(e, context)} >
+          <>
+          <h3 className='lr_header'>Log in to use the app.</h3>
+          <form onSubmit={e => { 
+              handleLogin(e, context) 
+              submitLoad()
+              }}>
             <label className='lr_label' htmlFor='email' >Email</label><br />
             <input className='lr_text' type='email' id='email' name='email' placeholder='Your email here' /><br />
             <label className='lr_label' htmlFor='password' >Password</label><br />
             <input className='lr_text' type='password' id='password' name='password' placeholder='Your password here' /><br />
             {(context.error) ? <p className='c_val'>{context.error}</p> : null}
-            <button className='lr_button' type='submit'>Login</button>
+            
+            <button className={disabled ? 'lr_button_dis' : 'lr_button'} type='submit' disabled={disabled}>Login</button><br />
+            <span className='lr_text'>Not a user?</span><Link to={'/register'}><button className='lr_register_button'>Register</button></Link><br />
+            {loading ? <Loading /> : null}
           </form></>}
         </div>
       )}} 
@@ -105,6 +131,11 @@ export function Register(props) {
       setValidated(true)
     }
   }
+  function submitLoad() {
+    setLoading(true)
+    setValidated(false)
+  }
+  let [loading, setLoading] = useState(false)
   let [user_name, setUserName] = useState(null)
   let [email, setEmail] = useState(null)
   let [password, setPassword] = useState(null)
@@ -117,21 +148,25 @@ export function Register(props) {
         <div className='lr_form'>
           {context.isLoggedIn ? <Redirect to='/' /> :
           <><h3 className='lr_header'>Register to use the app.</h3>
-          <form onSubmit={e => handleRegister(e, context)} >
+          <form onSubmit={e => { 
+            handleRegister(e, context)
+            submitLoad()
+          }} >
             <label className='lr_label' htmlFor='user_name' >Name</label><br />
             {user_name ? <p className='c_val'>{user_name}</p> : null }
-            <input className='lr_text' type='text' id='user_name' name='user_name' placeholder='Your name here' required onChange={e => validateUserName(e)} /><br />
+            <input className='lr_text' type='text' id='user_name' name='user_name' placeholder='Your name here' required onChange={(e) => validateUserName(e)} /><br />
             <label className='lr_label' htmlFor='email' >Email</label><br />
             {email ? <p className='c_val'>{email}</p> : null }
-            <input className='lr_text' type='email' id='email' name='email' placeholder='Your email here' required onChange={e => validateEmail(e)} /><br />
+            <input className='lr_text' type='email' id='email' name='email' placeholder='Your email here' required onChange={(e) => validateEmail(e)} /><br />
             <label className='lr_label' htmlFor='password' >Password</label><br />
             {password ? <p className='c_val'>{password}</p> : null }
-            <input className='lr_text' type='password' id='password' name='password' placeholder='Your password here' required onChange={e => validatePassword(e)} /><br />
+            <input className='lr_text' type='password' id='password' name='password' placeholder='Your password here' required onChange={(e) => validatePassword(e)} /><br />
             <label className='lr_label' htmlFor='conf_password' >Confirm Password</label><br />
-            {matchPassword ? <p className='c_val'>{matchPassword}</p> : null }<br />
-            <input className='lr_text' type='password' id='conf_password' name='conf_password' placeholder='Retype password' required onChange={e => checkPasswordMatch(e)} /><br />
+            {matchPassword ? <p className='c_val'>{matchPassword}</p> : null }
+            <input className='lr_text' type='password' id='conf_password' name='conf_password' placeholder='Retype password' required onChange={(e) => checkPasswordMatch(e)} /><br />
             {(context.error) ? <p className='c_val'>{context.error}</p> : null}
-            <button className='lr_button' type='submit' disabled={!validated}>Register</button>
+            <button className={!validated ? 'lr_button_dis' : 'lr_button'} type='submit' disabled={!validated}>Register</button><br />
+            {loading ? <Loading /> : null }
           </form></>}
         </div>
     )}}

@@ -40,27 +40,12 @@ class Contacts extends React.Component {
     })
   }
 
-  validateName(e) {
-    if (e) {
-      let valName = e.target.value
-      if (valName.length < 4 || valName.length > 50) {
-        this.setState({
-          name: 'Please keep the name between 4 and 50 characters.',
-        })
-        this.setState({
-          disabled: true
-        })
-      } else {
-        this.setState({
-          name: undefined
-        })
-      }
-    }
-  }
-
-  validateType(e) {
-    if (e) {
-      let valType = e.target.value
+  validateForm(e) {
+    e.preventDefault()
+    e.persist()
+    let valName = (e.target.id === 'name') ? e.target.value : null
+    let valType = (e.target.id === 'type') ? e.target.value : null
+    if (valType) {
       if (valType.length < 4 || valType.length > 50) {
         this.setState({
           type: 'Please keep contact type between 4 and 50 characters.',
@@ -68,9 +53,32 @@ class Contacts extends React.Component {
         this.setState({
           disabled: true
         })
-      } else {
+      } else if (valType.length >= 4 && valType.length <= 50) {
         this.setState({
-          type: undefined,
+          type: undefined
+        })
+      }
+      if (valType.length >= 4 && valType.length <= 50 && this.state.name === undefined) {
+        this.setState({
+          disabled: false
+        })
+      }
+    }
+    if (valName) {
+      if (valName.length < 4 || valName.length > 50) {
+        this.setState({
+          name: 'Please keep the name between 4 and 50 characters.',
+        })
+        this.setState({
+          disabled: true
+        })
+      } else if (valName.length >= 4 && valName.length <= 50) {
+        this.setState({
+          name: undefined
+        })
+      }
+      if (valName.length >= 4 && valName.length <= 50 && this.state.type === undefined) {
+        this.setState({
           disabled: false
         })
       }
@@ -115,13 +123,13 @@ class Contacts extends React.Component {
         { this.state.form ?
         <>
           <h3 className='c_header'>New Contact</h3>
-          <form className='c_new' onSubmit={e => this.submitContact(e)}>
-            <label className='c_label' htmlFor='name'>Contact Name</label><br />
+          <form className='c_new' onSubmit={e => this.submitContact(e)} onChange={e => this.validateForm(e)}>
+            <label className='c_label' htmlFor='name'>Contact Name*</label><br />
             {(this.state.name) ? <p className='c_val'>{this.state.name}</p> : null}
-            <input className='c_text' id='name' name='name' type='text' placeholder='Contact Name' onChange={e => this.validateName(e)} /><br />
-            <label className='c_label' htmlFor='type'>Contact Type</label><br />
+            <input className='c_text' id='name' name='name' type='text' placeholder='Contact Name' /><br />
+            <label className='c_label' htmlFor='type'>Contact Type*</label><br />
             {(this.state.type) ? <p className='c_val'>{this.state.type}</p> : null}
-            <input className='c_text' id='type' name='type' type='text' placeholder='Musician, Booker, Supporter, etc...' onChange={e => this.validateType(e)} /><br />
+            <input className='c_text' id='type' name='type' type='text' placeholder='Musician, Booker, Supporter, etc...' /><br />
             <label className='c_label' htmlFor='subtype'>Contact Subtype</label><br />
             <input className='c_text' id='subtype' name='subtype' type='text' placeholder='Drummer, Info Line, Media Shop, Etc...' /><br />
             <label className='c_label' htmlFor='subtype'>Contact Notes</label><br />
@@ -130,6 +138,7 @@ class Contacts extends React.Component {
             <input className='c_text' id='phone' name='phone' type='tel' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}' placeholder='Ex: 555-555-5555' /><br />
             <label className='c_label' htmlFor='email'>Contact Email</label><br />
             <input className='c_text' id='email' name='email' type='email' placeholder='example@domain.com' /><br />
+            <p>* = required</p>
             <button type='submit' className={(this.state.disabled) ? 'c_button_dis' : 'c_button'} disabled={this.state.disabled}>Create Contact</button>
           </form>
         </>

@@ -4,10 +4,23 @@
   background: black;
 }
 
-.footitem {
+.foottext {
   color: white;
   margin: 8px;
   font-size: 20px;
+}
+
+.footitem {
+  color: white;
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+  margin: 8px;
+  font-size: 20px;
+}
+
+.footitem:hover {
+  color: limegreen;
 }
 
 .icon {

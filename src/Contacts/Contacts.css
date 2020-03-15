@@ -8,13 +8,14 @@
 .c_item {
   margin: 20px 0;
   padding: 10px;
-  box-shadow: 2px 5px 15px -2px gray;
+  box-shadow: 2px 5px 15px -2px green;
   height: 87px;
   overflow: auto;
 }
 
 .c_new {
   margin: 10px;
+  text-align: center;
 }
 
 .c_header {
@@ -34,6 +35,10 @@
   margin: 10px 0 15px 0;
   padding: 5px 10px;
   font-size: 18px;
+}
+
+.c_area {
+  height: 84px;
 }
 
 .c_button {
@@ -69,4 +74,15 @@
 
 .c_val {
   color: red;
+}
+
+@media only screen and (min-width: 768px) {
+  .c_text {
+    width: 75%;
+    padding: 8px;
+  }
+
+  .c_new {
+    font-size: 20px;
+  }
 }

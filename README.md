@@ -1,68 +1,29 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Gig Figure Client
 
-## Available Scripts
+This repository is the client-side code for https://www.gigfigure.com. It was made in React.js and is hosted on Zeit. This is the source code for this app.
 
-In the project directory, you can run:
+Tech used: HTML, JavaScript, CSS, React.js, VSCode, Zeit, create-react-app, Git, Chrome DevTools, Font Awesome.
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Many of these features are contained within nested React routes that render these components in a logical way based on where the user will navigate. It renders differently depending on if users are logged in or not, and will load a specific page if the one of the URL routes is initially chosen.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Landing page
 
-### `npm test`
+This page contains a breif description of what this app is for, and how it is used. As with each page, there is a navigation section at the top to get around the app. Login/register buttons are at the top, and if users are logged in they can navigate to cases and contacts through the tabs. Otherwise, tabs will just navigate users to the login page.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Login/Register pages
 
-### `npm run build`
+These pages contain forms for users to be able to log in or register using some credentials. Once submitted successfully, the form will navigate users to the landing page as a logged in user.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Cases
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+This page is where a list of the user's cases will appear. A single case can be inspected by clicking on the link to that case, and a new case can be added with a form that comes up when you click "add new case". The new case will appear on the list upon form submission.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Contacts
 
-### `npm run eject`
+This page will have a list of each contact, along with their contact information. Near the top is a link to follow which will open a form to add a new contact. The only requirements are Name and Type. Other information is not needed for the creation of a contact.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Footer
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+In the footer contains a simple set of icons directing the user back to my linkedin, portfolio, and github in order for them to explore my professional skills and experience.

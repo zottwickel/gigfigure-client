@@ -42,16 +42,10 @@ class Case extends React.Component {
                 <li key={contact.contact_id} className='ca_co_item'>
                   <h5 className='ca_subheading'>Name</h5>
                   <p>{contact.name}</p>
-                  <h6 className='ca_subheading'>Type</h6>
-                  <p>{contact.type}</p>
-                  <h6 className='ca_subheading'>Subtype</h6>
-                  <p>{contact.subtype}</p>
                   <h6 className='ca_subheading'>Phone</h6>
                   <p>{contact.phone}</p>
                   <h6 className='ca_subheading'>Email</h6>
                   <p>{contact.email}</p>
-                  <h6 className='ca_subheading'>Notes</h6>
-                  <p>{contact.notes}</p>
                 </li>
               )
             })}

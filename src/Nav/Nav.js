@@ -21,6 +21,7 @@ export default function Nav(props) {
           {context => { return (
             context.isLoggedIn
             ? <div className='logins_box'>
+                <span className='l_text'>You are logged in.</span>
                 <button className='logout_button' onClick={e => handleLogout(e, context)}>Logout</button>
               </div>
             : <div className='logins_box'>
