@@ -132,7 +132,7 @@ class Contacts extends React.Component {
             <input className='c_text' id='type' name='type' type='text' placeholder='Musician, Booker, Supporter, etc...' /><br />
             <label className='c_label' htmlFor='subtype'>Contact Subtype</label><br />
             <input className='c_text' id='subtype' name='subtype' type='text' placeholder='Drummer, Info Line, Media Shop, Etc...' /><br />
-            <label className='c_label' htmlFor='subtype'>Contact Notes</label><br />
+            <label className='c_label' htmlFor='notes'>Contact Notes</label><br />
             <input className='c_text' id='notes' name='notes' type='text' placeholder='Notes' /><br />
             <label className='c_label' htmlFor='phone'>Phone Number</label><br />
             <input className='c_text' id='phone' name='phone' type='tel' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}' placeholder='Ex: 555-555-5555' /><br />

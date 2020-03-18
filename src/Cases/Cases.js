@@ -186,7 +186,7 @@ class Cases extends React.Component {
         <>
           <h3 className='c_header'>New Case</h3>
           <form className='c_new' onSubmit={e => this.handleNewCase(e, contactComp.length)}>
-            <p className='c_label'>Contacts</p>
+            <label className='c_label' htmlFor='sel0'>Contact(s)</label>
             {contactComp.map(el => el)}
             <button className='c_add' onClick={e => this.addContactDropdown(e)}>More</button>
             <button className='c_min' onClick={e => this.removeContactDropdown(e)}>Less</button><br />

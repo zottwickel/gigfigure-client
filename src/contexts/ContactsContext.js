@@ -16,7 +16,6 @@ export class ContactsProvider extends Component {
   }
 
   setError = (error) => {
-    console.error(error)
     this.setState({ error })
   }
 

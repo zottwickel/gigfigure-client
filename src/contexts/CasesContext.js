@@ -19,7 +19,6 @@ export class CasesProvider extends Component {
   }
 
   setError = (error) => {
-    console.error(error)
     this.setState({ error })
   }
 

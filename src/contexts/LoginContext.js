@@ -19,7 +19,6 @@ export class LoginProvider extends Component {
   }
 
   setError = (error) => {
-    console.error(error)
     this.setState({ error })
   }
 

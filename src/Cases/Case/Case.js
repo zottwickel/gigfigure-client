@@ -8,17 +8,17 @@ import './Case.css'
 
 class Case extends React.Component {
 
-  static contextType = CasesContext
+  static contextType = CasesContext;
 
   componentDidMount() {
-    this.context.clearError()
+    this.context.clearError();
     CasesApiService.getCases()
       .then(this.context.setCases)
-      .catch(this.context.setError)
-  }
+      .catch(this.context.setError);
+  };
 
   render() {
-    const thisCase = this.context.cases.filter(el => el.case_id.toString() === this.props.match.params.case_id)[0]
+    const thisCase = this.context.cases.filter(el => el.case_id.toString() === this.props.match.params.case_id)[0];
     return(
       <div className='ca_box'>
         {(this.context.cases.length > 0) ? <>
@@ -27,7 +27,7 @@ class Case extends React.Component {
             <>
               {!loginContext.isLoggedIn ? <Redirect to='/login' /> : null }
             </>
-          )}}
+          )}};
         </LoginContext.Consumer>
         <div className='ca_item'>
           <h3 className='c_header'>{`Case ${thisCase.case_id}`}</h3>
@@ -47,14 +47,14 @@ class Case extends React.Component {
                   <h6 className='ca_subheading'>Email</h6>
                   <p>{contact.email}</p>
                 </li>
-              )
-            })}
+              );
+            })};
           </ul>
         </div>
         </>: null }
       </div>
-    )
-  }
-}
+    );
+  };
+};
 
 export default Case
