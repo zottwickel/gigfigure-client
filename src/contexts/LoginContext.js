@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 const LoginContext = React.createContext({
   isLoggedIn: false,
@@ -8,9 +8,9 @@ const LoginContext = React.createContext({
   setSession: () => {},
   beginSession: () => {},
   endSession:() => {},
-})
+});
 
-export default LoginContext
+export default LoginContext;
 
 export class LoginProvider extends Component {
   state = {
@@ -19,30 +19,30 @@ export class LoginProvider extends Component {
   }
 
   setError = (error) => {
-    this.setState({ error })
+    this.setState({ error });
   }
 
   clearError = () => {
-    this.setState({ error: null })
+    this.setState({ error: null });
   }
 
   beginSession = () => {
       this.setState({ 
         isLoggedIn: !this.state.isLoggedIn,
-      })
+      });
   }
 
   endSession = () => {
     this.setState({
       isLoggedIn: !this.state.isLoggedIn
-    })
+    });
   }
 
   setSession = () => {
     if (window.sessionStorage.getItem('auth-token')) {
       this.setState({
         isLoggedIn: true
-      })
+      });
     }
   }
 
@@ -57,12 +57,12 @@ export class LoginProvider extends Component {
       setSession: this.setSession,
       setError: this.setError,
       clearError: this.clearError
-    }
+    };
 
     return (
       <LoginContext.Provider value={value}>
         {this.props.children}
       </LoginContext.Provider>
-    )
+    );
   }
 }

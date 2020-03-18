@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import { LoginProvider } from './contexts/LoginContext'
-import { CasesProvider } from './contexts/CasesContext'
-import { ContactsProvider } from './contexts/ContactsContext'
+import { LoginProvider } from './contexts/LoginContext';
+import { CasesProvider } from './contexts/CasesContext';
+import { ContactsProvider } from './contexts/ContactsContext';
 
 ReactDOM.render(
   <BrowserRouter>

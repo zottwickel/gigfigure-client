@@ -1,5 +1,5 @@
-import TokenService from './token-service'
-import config from '../config'
+import TokenService from './token-service';
+import config from '../config';
 
 const CasesApiService = {
   getCases() {
@@ -13,7 +13,7 @@ const CasesApiService = {
         (!res.ok)
         ? res.json.then(e => Promise.reject(e))  
         : res.json()
-      )
+      );
   },
   postCase(notes, contacts) {
     return fetch(`${config.API_ENDPOINT}/cases`, {
@@ -31,8 +31,8 @@ const CasesApiService = {
         (!res.ok)
         ? res.json.then(e => Promise.reject(e))  
         : res.json()
-      )
+      );
   },
-}
+};
 
-export default CasesApiService
+export default CasesApiService;

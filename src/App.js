@@ -1,37 +1,37 @@
-import React from 'react'
-import { Switch, Route } from 'react-router-dom'
-import Nav from './Nav/Nav'
-import Home from './Home/Home'
-import Contacts from './Contacts/Contacts'
-import Cases from './Cases/Cases'
-import Foot from './Foot/Foot'
-import LoginContext from './contexts/LoginContext'
-import { Login, Register } from './Login-Register/Login-Register'
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import Nav from './Nav/Nav';
+import Home from './Home/Home';
+import Contacts from './Contacts/Contacts';
+import Cases from './Cases/Cases';
+import Foot from './Foot/Foot';
+import LoginContext from './contexts/LoginContext';
+import { Login, Register } from './Login-Register/Login-Register';
 import './App.css';
 
 class App extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       isLoggedIn: false,
       activeTab: 'none',
       toggleLogin: () => {
         this.setState({
           isLoggedIn: !this.state.isLoggedIn,
-        })
+        });
       },
       setActiveTab: (tab) => {
         this.setState({
           activeTab: tab
-        })
+        });
       }
-    }
-  }
+    };
+  };
 
-  static contextType = LoginContext
+  static contextType = LoginContext;
   componentDidMount() {
-    this.context.setSession()
-  }
+    this.context.setSession();
+  };
   render() {
     return (
       <div className="App wrapper">
@@ -64,8 +64,8 @@ class App extends React.Component {
         <Foot />
         <div className='shoe'></div>
       </div>
-    )
-  }
-}
+    );
+  };
+};
 
 export default App;

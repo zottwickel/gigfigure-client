@@ -1,112 +1,112 @@
-import React from 'react'
-import { Redirect } from 'react-router-dom'
-import LoginContext from '../contexts/LoginContext'
-import CasesContext from '../contexts/CasesContext'
-import ContactsApiService from '../services/contacts-api-service'
-import './Contacts.css'
+import React from 'react';
+import { Redirect } from 'react-router-dom';
+import LoginContext from '../contexts/LoginContext';
+import CasesContext from '../contexts/CasesContext';
+import ContactsApiService from '../services/contacts-api-service';
+import './Contacts.css';
 
 class Contacts extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       form: false,
       name: null,
       type: null,
       disabled: true
-    }
+    };
     this.callContacts = () => {
-      this.context.clearError()
+      this.context.clearError();
       ContactsApiService.getContacts()
         .then(this.context.setContacts)
-        .catch(this.context.setError)
-    }
+        .catch(this.context.setError);
+    };
   }
 
-  static contextType = CasesContext
+  static contextType = CasesContext;
 
   componentDidMount() {
-    this.props.setActiveTab('contacts')
-    this.callContacts() 
+    this.props.setActiveTab('contacts');
+    this.callContacts();
   }
 
   componentWillUnmount() {
-    this.props.setActiveTab('none')
+    this.props.setActiveTab('none');
   }
 
   toggleForm(e) {
-    e.preventDefault()
+    e.preventDefault();
     this.setState({
       form: !this.state.form
-    })
+    });
   }
 
   validateForm(e) {
-    e.preventDefault()
-    e.persist()
-    let valName = (e.target.id === 'name') ? e.target.value : null
-    let valType = (e.target.id === 'type') ? e.target.value : null
+    e.preventDefault();
+    e.persist();
+    let valName = (e.target.id === 'name') ? e.target.value : null;
+    let valType = (e.target.id === 'type') ? e.target.value : null;
     if (valType) {
       if (valType.length < 4 || valType.length > 50) {
         this.setState({
           type: 'Please keep contact type between 4 and 50 characters.',
-        })
+        });
         this.setState({
           disabled: true
-        })
+        });
       } else if (valType.length >= 4 && valType.length <= 50) {
         this.setState({
           type: undefined
-        })
+        });
       }
       if (valType.length >= 4 && valType.length <= 50 && this.state.name === undefined) {
         this.setState({
           disabled: false
-        })
+        });
       }
     }
     if (valName) {
       if (valName.length < 4 || valName.length > 50) {
         this.setState({
           name: 'Please keep the name between 4 and 50 characters.',
-        })
+        });
         this.setState({
           disabled: true
-        })
+        });
       } else if (valName.length >= 4 && valName.length <= 50) {
         this.setState({
           name: undefined
-        })
+        });
       }
       if (valName.length >= 4 && valName.length <= 50 && this.state.type === undefined) {
         this.setState({
           disabled: false
-        })
+        });
       }
     }
   }
 
   submitContact(e) {
-    e.preventDefault()
-    e.persist()
+    e.preventDefault();
+    e.persist();
 
-    const name = e.target.name.value
-    const type = e.target.type.value
-    const subtype = e.target.subtype.value
-    const phone = e.target.phone.value
-    const email = e.target.email.value
-    const notes = e.target.notes.value
+    const name = e.target.name.value;
+    const type = e.target.type.value;
+    const subtype = e.target.subtype.value;
+    const phone = e.target.phone.value;
+    const email = e.target.email.value;
+    const notes = e.target.notes.value;
 
     ContactsApiService.postContact(name, type, subtype, phone, email, notes)
       .then(this.callContacts)
       .then(this.toggleForm(e))
-      .catch(this.context.setError)
+      .catch(this.context.setError);
     
-    e.target.name.value = ''
-    e.target.type.value = ''
-    e.target.subtype.value = ''
-    e.target.phone.value = ''
-    e.target.email.value = ''
-    e.target.notes.value = ''
+    e.target.name.value = '';
+    e.target.type.value = '';
+    e.target.subtype.value = '';
+    e.target.phone.value = '';
+    e.target.email.value = '';
+    e.target.notes.value = '';
   }
 
   render() {
@@ -117,7 +117,7 @@ class Contacts extends React.Component {
             <>
               {!loginContext.isLoggedIn ? <Redirect to='/login' /> : null }
             </>
-          )}}
+          );}}
         </LoginContext.Consumer>
         <button className='form_toggle' onClick={e => this.toggleForm(e)}>{!this.state.form ? 'Add New Contact' : 'Close Form'}</button>
         { this.state.form ?
@@ -156,12 +156,12 @@ class Contacts extends React.Component {
                 <p className='c_left'><a href={`tel:${contact.phone}`}>{contact.phone}</a></p>
                 <p className='c_right'><a href={`mailto:${contact.email}`}>{contact.email}</a></p><br />
               </li>
-            )
+            );
           })}
         </ul>
       </div>
-    )
+    );
   }
 }
 
-export default Contacts
+export default Contacts;

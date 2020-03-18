@@ -1,18 +1,18 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import LoginContext from '../contexts/LoginContext'
-import TokenService from '../services/token-service'
-import './Nav.css'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import LoginContext from '../contexts/LoginContext';
+import TokenService from '../services/token-service';
+import './Nav.css';
 
 export default function Nav(props) {
 
   function handleLogout(e, context) {
-    e.preventDefault(e)
-    context.endSession()
-    TokenService.clearAuthToken()
+    e.preventDefault(e);
+    context.endSession();
+    TokenService.clearAuthToken();
   }
 
-  const activeTab = props.activeTab
+  const activeTab = props.activeTab;
 
   return (
         <div className='nav_box parallax bkd1'>
@@ -28,7 +28,7 @@ export default function Nav(props) {
                 <Link to={'/login'}><button className='login_button'>Login</button></Link>
                 <Link to={'/register'}><button className='register_button'>Register</button></Link>
               </div>
-            )
+            );
           }}
           </LoginContext.Consumer>
             <Link to={'/'}><h1 className='nav_title'>Gig Figure</h1></Link>
@@ -49,9 +49,9 @@ export default function Nav(props) {
                 </>
               }
             </div>
-            )}}
+            );}}
             </LoginContext.Consumer>
           </nav>
         </div>
-  )
+  );
 }

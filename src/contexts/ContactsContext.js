@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 const ContactsContext = React.createContext({
   contacts: [],
@@ -6,8 +6,8 @@ const ContactsContext = React.createContext({
   setError: () => {},
   clearError: () => {},
   setContacts: () => {},
-})
-export default ContactsContext
+});
+export default ContactsContext;
 
 export class ContactsProvider extends Component {
   state = {
@@ -16,15 +16,15 @@ export class ContactsProvider extends Component {
   }
 
   setError = (error) => {
-    this.setState({ error })
+    this.setState({ error });
   }
 
   clearError = () => {
-    this.setState({ error: null })
+    this.setState({ error: null });
   }
 
   setContacts = (contacts) => {
-    this.setState({ contacts })
+    this.setState({ contacts });
   }
 
   render() {
@@ -34,11 +34,11 @@ export class ContactsProvider extends Component {
       setError: this.setError,
       clearError: this.clearError,
       setcontacts: this.setcontacts
-    }
+    };
     return (
       <ContactsContext.Provider value={value}>
         {this.props.children}
       </ContactsContext.Provider>
-    )
+    );
   }
 }

@@ -1,5 +1,5 @@
-import TokenService from './token-service'
-import config from '../config'
+import TokenService from './token-service';
+import config from '../config';
 
 const ContactsApiService = {
   getContacts() {
@@ -13,7 +13,7 @@ const ContactsApiService = {
         (!res.ok)
         ? res.json.then(e => Promise.reject(e))  
         : res.json()
-      )
+      );
   },
   postContact(name, type, subtype, phone, email, notes) {
     return fetch(`${config.API_ENDPOINT}/contacts`, {
@@ -35,8 +35,8 @@ const ContactsApiService = {
         (!res.ok)
         ? res.json.then(e => Promise.reject(e))  
         : res.json()
-      )
+      );
   },
-}
+};
 
-export default ContactsApiService
+export default ContactsApiService;

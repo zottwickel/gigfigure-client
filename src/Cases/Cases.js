@@ -1,113 +1,113 @@
-import React from 'react'
-import { Route, Link, Redirect } from 'react-router-dom'
-import LoginContext from '../contexts/LoginContext'
-import CasesContext from '../contexts/CasesContext'
-import CasesApiService from '../services/cases-api-service'
-import ContactsApiService from '../services/contacts-api-service'
-import formatDate from '../services/format-date'
-import Loading from '../Util/Loading'
-import Case from './Case/Case'
-import './Cases.css'
+import React from 'react';
+import { Route, Link, Redirect } from 'react-router-dom';
+import LoginContext from '../contexts/LoginContext';
+import CasesContext from '../contexts/CasesContext';
+import CasesApiService from '../services/cases-api-service';
+import ContactsApiService from '../services/contacts-api-service';
+import formatDate from '../services/format-date';
+import Loading from '../Util/Loading';
+import Case from './Case/Case';
+import './Cases.css';
 
 class Cases extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       form: false,
       contacts: 1,
       notes: null,
       disabled: true
-    }
+    };
     this.callCases = () => {
-      this.context.clearError()
+      this.context.clearError();
       CasesApiService.getCases()
         .then(this.context.setCases)
-        .catch(this.context.setError)
-    }
+        .catch(this.context.setError);
+    };
     this.callContacts = () => {
-      this.context.clearError()
+      this.context.clearError();
       ContactsApiService.getContacts()
         .then(this.context.setContacts)
-        .catch(this.context.setError)
-    }
+        .catch(this.context.setError);
+    };
   }
 
   static contextType = CasesContext
 
   toggleForm(e) {
-    e.preventDefault()
+    e.preventDefault();
     this.setState({
       form: !this.state.form
-    })
+    });
   }
 
   addContactDropdown(e) {
-    e.preventDefault()
+    e.preventDefault();
     if (this.state.contacts < 5) {
       this.setState({
         contacts: this.state.contacts + 1
-      })
+      });
     }
   }
 
   removeContactDropdown(e) {
-    e.preventDefault()
+    e.preventDefault();
     if (this.state.contacts > 1) {
       this.setState({
         contacts: this.state.contacts - 1
-      })
+      });
     }
   }
 
   scrollWindow(e) {
-    e.preventDefault()
-    window.scrollTo(0, 0)
+    e.preventDefault();
+    window.scrollTo(0, 0);
   }
 
   componentDidMount() {
-    this.props.setActiveTab('cases')
-    this.callCases()
-    this.callContacts()
+    this.props.setActiveTab('cases');
+    this.callCases();
+    this.callContacts();
   }
 
   componentWillUnmount() {
-    this.props.setActiveTab('none')
+    this.props.setActiveTab('none');
   }
 
   validateNotes(e) {
-    e.preventDefault()
-    const valNotes = e.target.value
+    e.preventDefault();
+    const valNotes = e.target.value;
     if (valNotes.length < 5 || valNotes.length > 500) {
       this.setState({
         notes: 'Please keep notes between 5 and 500 characters long.',
         disabled: true
-      })
+      });
     } else {
       this.setState({
         notes: undefined,
         disabled: false
-      })
+      });
     }
   }
 
   handleNewCase(e, numContacts) {
-    e.preventDefault()
-    e.persist()
-    const notes = e.target.notes.value
-    const contactArr= []
+    e.preventDefault();
+    e.persist();
+    const notes = e.target.notes.value;
+    const contactArr= [];
     switch (numContacts) {
       case 1:
         contactArr.push({
           contact_id: e.target.sel0.value
-        })
-      break
+        });
+      break;
       case 2:
         contactArr.push({
           contact_id: e.target.sel0.value
-        },{
+        }, {
           contact_id: e.target.sel1.value
-        })
-      break
+        });
+      break;
       case 3:
         contactArr.push({
           contact_id: e.target.sel0.value
@@ -115,8 +115,8 @@ class Cases extends React.Component {
           contact_id: e.target.sel1.value
         }, {
           contact_id: e.target.sel2.value
-        })
-      break
+        });
+      break;
       case 4:
         contactArr.push({
           contact_id: e.target.sel0.value
@@ -126,8 +126,8 @@ class Cases extends React.Component {
           contact_id: e.target.sel2.value
         }, {
           contact_id: e.target.sel3.value
-        })
-      break
+        });
+      break;
       case 5:
         contactArr.push({
           contact_id: e.target.sel0.value
@@ -139,21 +139,21 @@ class Cases extends React.Component {
           contact_id: e.target.sel3.value
         }, {
           contact_id: e.target.sel4.value
-        })
-      break
+        });
+      break;
       default:
-      break
+      break;
     }
-    e.target.notes.value = ''
+    e.target.notes.value = '';
     CasesApiService.postCase(notes, contactArr)
       .then(this.callCases)
       .then(this.toggleForm(e))
-      .catch(this.context.setError)
+      .catch(this.context.setError);
   }
 
   render() {
     
-    const contactComp = []
+    const contactComp = [];
     for (let i=0; i < this.state.contacts; i++) {
       contactComp.push(
         <div key={i.toString()}>
@@ -162,11 +162,11 @@ class Cases extends React.Component {
             {(this.context.contacts.length > 0 && this.context.contacts[0] !== null) ? this.context.contacts.map(contact => {
               return (
                 <option key={contact.contact_id} value={contact.contact_id}>{contact.name}</option>
-              )
+              );
             }) : null}
           </select><br />
         </div>
-      )
+      );
     }
     return(
       <div className='contact_folder' ref={this.scrollRef}>
@@ -175,7 +175,7 @@ class Cases extends React.Component {
             <>
               {!loginContext.isLoggedIn ? <Redirect to='/login' /> : null }
             </>
-          )}}
+          );}}
         </LoginContext.Consumer>
         <Route 
           exact path='/cases/:case_id'
@@ -219,19 +219,19 @@ class Cases extends React.Component {
                         <li key={contact.contact_id + i}>
                           <p>{contact.name}</p>
                         </li>
-                      )
+                      );
                     })}
                   </ul>
                   <p className='ca_notes'></p>
                 </div>
               </li>
-            )
+            );
           })}
         </ul>
         }
       </div>
-    )
+    );
   }
 }
 
-export default Cases
+export default Cases;
