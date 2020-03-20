@@ -1,5 +1,9 @@
 import config from '../config';
 
+/**
+ * Service functions to utilize the fetch API at the users and auth endpoints.
+ */
+
 const AuthApiService = {
   postLogin(credentials) {
     return fetch(`${config.API_ENDPOINT}/auth/login`, {

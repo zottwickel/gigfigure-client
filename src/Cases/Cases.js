@@ -9,6 +9,10 @@ import Loading from '../Util/Loading';
 import Case from './Case/Case';
 import './Cases.css';
 
+/**
+ * 
+ */
+
 class Cases extends React.Component {
   constructor(props) {
     super(props);

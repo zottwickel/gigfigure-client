@@ -4,6 +4,11 @@ import LoginContext from '../contexts/LoginContext';
 import TokenService from '../services/token-service';
 import './Nav.css';
 
+/**
+ * This is the nav bar that has that cool parallax effect.
+ * It stores all the links and the tabs for browsing in the app.
+ */
+
 export default function Nav(props) {
 
   function handleLogout(e, context) {

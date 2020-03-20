@@ -1,4 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+
+/**
+ * This context holds the cases for a user and makes them available.
+ */
 
 const CasesContext = React.createContext({
   cases: [],
@@ -7,9 +11,9 @@ const CasesContext = React.createContext({
   setError: () => {},
   clearError: () => {},
   setCases: () => {},
-})
+});
 
-export default CasesContext
+export default CasesContext;
 
 export class CasesProvider extends Component {
   state = {
@@ -19,19 +23,19 @@ export class CasesProvider extends Component {
   }
 
   setError = (error) => {
-    this.setState({ error })
+    this.setState({ error });
   }
 
   clearError = () => {
-    this.setState({ error: null })
+    this.setState({ error: null });
   }
 
   setCases = (cases) => {
-    this.setState({ cases })
+    this.setState({ cases });
   }
 
   setContacts = (contacts) => {
-    this.setState({ contacts })
+    this.setState({ contacts });
   }
 
   render() {
@@ -43,11 +47,11 @@ export class CasesProvider extends Component {
       clearError: this.clearError,
       setCases: this.setCases,
       setContacts: this.setContacts
-    }
+    };
     return (
       <CasesContext.Provider value={value}>
         {this.props.children}
       </CasesContext.Provider>
-    )
+    );
   }
 }

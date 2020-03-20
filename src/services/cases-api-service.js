@@ -1,6 +1,10 @@
 import TokenService from './token-service';
 import config from '../config';
 
+/**
+ * Service functions to utilize the fetch API at the cases endpoint.
+ */
+
 const CasesApiService = {
   getCases() {
     return fetch(`${config.API_ENDPOINT}/cases`, {

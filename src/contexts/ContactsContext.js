@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 
+/**
+ * This context holds and distributes the contacts from the contacts
+ *   endpoint.
+ */
+
 const ContactsContext = React.createContext({
   contacts: [],
   error: null,

@@ -1,3 +1,8 @@
+/**
+ * This nifty function converts the iso date
+ *   returned by PSQL to a meaningful string.
+ */
+
 export default function formatDate(IsoDate) {
   let date = new Date(IsoDate);
   var hours = date.getHours();

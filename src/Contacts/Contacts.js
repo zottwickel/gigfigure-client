@@ -5,6 +5,10 @@ import CasesContext from '../contexts/CasesContext';
 import ContactsApiService from '../services/contacts-api-service';
 import './Contacts.css';
 
+/**
+ * This component displays the contacts in a list and a form for new contacts.
+ */
+
 class Contacts extends React.Component {
   constructor(props) {
     super(props);
@@ -153,8 +157,8 @@ class Contacts extends React.Component {
                 <h4>{contact.name}</h4>
                 <p className='c_left'>{contact.type}</p>
                 <p className='c_right'>{contact.subtype}</p><br />
-                <p className='c_left'><a href={`tel:${contact.phone}`}>{contact.phone}</a></p>
-                <p className='c_right'><a href={`mailto:${contact.email}`}>{contact.email}</a></p><br />
+                <p className='c_left'><a href={`tel:${contact.phone}`} target="_blank">{contact.phone}</a></p>
+                <p className='c_right'><a href={`mailto:${contact.email}`} target="_blank">{contact.email}</a></p><br />
               </li>
             );
           })}

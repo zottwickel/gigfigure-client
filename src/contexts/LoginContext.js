@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 
+/**
+ * This context holds user login information and handles changes in the app
+ *   based on user's logged in status.
+ */
+
 const LoginContext = React.createContext({
   isLoggedIn: false,
   error: null,

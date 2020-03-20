@@ -1,11 +1,13 @@
-import React from 'react'
-import { Redirect } from 'react-router-dom'
-import CasesContext from '../../contexts/CasesContext'
-import LoginContext from '../../contexts/LoginContext'
-import formatDate from '../../services/format-date'
-import CasesApiService from '../../services/cases-api-service'
-import './Case.css'
-
+import React from 'react';
+import { Redirect } from 'react-router-dom';
+import CasesContext from '../../contexts/CasesContext';
+import LoginContext from '../../contexts/LoginContext';
+import formatDate from '../../services/format-date';
+import CasesApiService from '../../services/cases-api-service';
+import './Case.css';
+/**
+ * This component will display a single case.
+ */
 class Case extends React.Component {
 
   static contextType = CasesContext;
@@ -27,7 +29,7 @@ class Case extends React.Component {
             <>
               {!loginContext.isLoggedIn ? <Redirect to='/login' /> : null }
             </>
-          )}};
+          );}};
         </LoginContext.Consumer>
         <div className='ca_item'>
           <h3 className='c_header'>{`Case ${thisCase.case_id}`}</h3>
@@ -57,4 +59,4 @@ class Case extends React.Component {
   };
 };
 
-export default Case
+export default Case;

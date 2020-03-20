@@ -8,7 +8,11 @@ import Foot from './Foot/Foot';
 import LoginContext from './contexts/LoginContext';
 import { Login, Register } from './Login-Register/Login-Register';
 import './App.css';
-
+/**
+ * This is the main app component where all the action happens.
+ * It contains some switch/route components that will render
+ *   different components based on URL.
+ */
 class App extends React.Component {
   constructor(props) {
     super(props);

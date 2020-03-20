@@ -1,6 +1,11 @@
 import React from 'react';
 import './Home.css';
 
+/**
+ * This is the landing page component. It gives a brief
+ *   explanation of what the app does.
+ */
+
 class Home extends React.Component {
   render() {
     return( 
