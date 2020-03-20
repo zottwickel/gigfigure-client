@@ -44,8 +44,7 @@ class App extends React.Component {
           <Switch>
             <Route
               exact path='/'
-              render={props => <Home {...props} {...this.state} />
-              }
+              render={props => <Home {...props} {...this.state} />}
             />
             <Route
               exact path='/contacts'
@@ -62,6 +61,9 @@ class App extends React.Component {
             <Route
               exact path='/register'
               render={props => <Register {...props} {...this.state} />}
+            />
+            <Route
+              render={props => <Home {...props} {...this.state} />}
             />
           </Switch>
         </div>

@@ -8,11 +8,9 @@ import formatDate from '../services/format-date';
 import Loading from '../Util/Loading';
 import Case from './Case/Case';
 import './Cases.css';
-
 /**
- * 
+ * This is the component that displays cases in a list and has a form for creating new cases.
  */
-
 class Cases extends React.Component {
   constructor(props) {
     super(props);
@@ -70,8 +68,10 @@ class Cases extends React.Component {
 
   componentDidMount() {
     this.props.setActiveTab('cases');
-    this.callCases();
-    this.callContacts();
+    if (this.context.isLoggedIn) {
+      this.callCases();
+      this.callContacts();
+    }
   }
 
   componentWillUnmount() {
@@ -202,8 +202,8 @@ class Cases extends React.Component {
         </>
         : null }
         <h3 className='c_header'>Your Cases</h3>
-        { (this.context.cases.length === 0) ? <Loading /> : null }
-        { (this.context.cases[0] === null) ? <p>You have no cases yet.</p> :
+        { (this.context.cases.length === 0) ? <p>You have no cases yet.</p> : null }
+        { (this.context.cases[0] === null) ?  <Loading /> :
         <ul className='c_list'>
           {this.context.cases.map(singleCase => {
             return (

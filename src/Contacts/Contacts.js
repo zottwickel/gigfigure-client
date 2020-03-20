@@ -30,7 +30,9 @@ class Contacts extends React.Component {
 
   componentDidMount() {
     this.props.setActiveTab('contacts');
-    this.callContacts();
+    if (this.context.isLoggedIn) {
+      this.callContacts();
+    }
   }
 
   componentWillUnmount() {
@@ -157,8 +159,8 @@ class Contacts extends React.Component {
                 <h4>{contact.name}</h4>
                 <p className='c_left'>{contact.type}</p>
                 <p className='c_right'>{contact.subtype}</p><br />
-                <p className='c_left'><a href={`tel:${contact.phone}`} target="_blank">{contact.phone}</a></p>
-                <p className='c_right'><a href={`mailto:${contact.email}`} target="_blank">{contact.email}</a></p><br />
+                <p className='c_left'><a href={`tel:${contact.phone}`} target="_blank"  rel="noopener noreferrer">{contact.phone}</a></p>
+                <p className='c_right'><a href={`mailto:${contact.email}`} target="_blank"  rel="noopener noreferrer">{contact.email}</a></p><br />
               </li>
             );
           })}

@@ -5,7 +5,7 @@ import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 import './Foot.css';
 
 /**
- * This footer contains all of the links to my personal website
+ * This footer contains all of the links to my personal website that will open in a new tab.
  */
 
 class Foot extends React.Component {

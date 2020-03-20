@@ -10,7 +10,7 @@ Many of these features are contained within nested React routes that render thes
 
 ### Landing page
 
-This page contains a breif description of what this app is for, and how it is used. As with each page, there is a navigation section at the top to get around the app. Login/register buttons are at the top, and if users are logged in they can navigate to cases and contacts through the tabs. Otherwise, tabs will just navigate users to the login page.
+This page contains a brief description of what this app is for, and how it is used. As with each page, there is a navigation section at the top to get around the app. Login/register buttons are at the top, and if users are logged in they can navigate to cases and contacts through the tabs. Otherwise, tabs will just navigate users to the login page.
 
 ### Login/Register pages
 
@@ -27,3 +27,11 @@ This page will have a list of each contact, along with their contact information
 ### Footer
 
 In the footer contains a simple set of icons directing the user back to my linkedin, portfolio, and github in order for them to explore my professional skills and experience.
+
+## Images
+<img height='200' width='350' src='https://i.imgur.com/b0NiDHx.jpg' alt='Splash page'>
+<img height='200' width='350' src='https://i.imgur.com/Ryt2aJ9.jpg' alt='Login page'>
+<img height='200' width='350' src='https://i.imgur.com/yhSaaRh.jpg' alt='Contacts page'>
+<img height='200' width='350' src='https://i.imgur.com/5XWeFfu.jpg' alt='New case form'>
+<img height='200' width='350' src='https://i.imgur.com/tVjxDPP.jpg' alt='Cases Page'>
+<img height='200' width='350' src='https://i.imgur.com/HpxjvRG.jpg' alt='New Contact Form'>

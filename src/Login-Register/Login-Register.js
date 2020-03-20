@@ -10,34 +10,7 @@ import './Login-Register.css';
  * These two components handle the login and register forms.
  */
 
-function handleRegister(e, context) {
-  e.preventDefault();
-  e.persist();
-  const { user_name, password, email } = e.target;
 
-  context.clearError();
-  AuthApiService.postUser({
-    user_name: user_name.value,
-    password: password.value,
-    email: email.value
-  })
-    .then(user => {
-      AuthApiService.postLogin({
-        email: email.value,
-        password: password.value
-      })
-        .then(res => {
-          TokenService.saveAuthToken(res.authToken, res.user_id);
-          context.beginSession();
-        })
-        .catch(res => {
-          context.setError(res.error);
-        });
-    })
-    .catch(res => {
-      context.setError(res.error);
-    });
-}
 
 export function Login(props) {
   function submitLoad() {
@@ -95,6 +68,38 @@ export function Login(props) {
 }
 
 export function Register(props) {
+  function handleRegister(e, context) {
+    e.preventDefault();
+    e.persist();
+    const { user_name, password, email } = e.target;
+  
+    context.clearError();
+    AuthApiService.postUser({
+      user_name: user_name.value,
+      password: password.value,
+      email: email.value
+    })
+      .then(user => {
+        AuthApiService.postLogin({
+          email: email.value,
+          password: password.value
+        })
+          .then(res => {
+            TokenService.saveAuthToken(res.authToken, res.user_id);
+            context.beginSession();
+          })
+          .catch(res => {
+            context.setError(res.error);
+            setValidated(false);
+            setLoading(false);
+          });
+      })
+      .catch(res => {
+        context.setError(res.error);
+        setValidated(false);
+        setLoading(false);
+      });
+  }
   function validateUserName(e) {
     if (e.target.value.length > 50 || e.target.value.length < 1 ) {
       setUserName('Screen Name must be between 1 and 50 characters long');

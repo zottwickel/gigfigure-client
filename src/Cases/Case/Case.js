@@ -14,9 +14,11 @@ class Case extends React.Component {
 
   componentDidMount() {
     this.context.clearError();
-    CasesApiService.getCases()
-      .then(this.context.setCases)
-      .catch(this.context.setError);
+    if (this.context.isLoggedIn) {
+      CasesApiService.getCases()
+        .then(this.context.setCases)
+        .catch(this.context.setError);
+    }
   };
 
   render() {
