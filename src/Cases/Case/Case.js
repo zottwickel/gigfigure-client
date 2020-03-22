@@ -1,7 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import CasesContext from '../../contexts/CasesContext';
-import LoginContext from '../../contexts/LoginContext';
 import formatDate from '../../services/format-date';
 import CasesApiService from '../../services/cases-api-service';
 import './Case.css';
@@ -19,20 +17,13 @@ class Case extends React.Component {
         .then(this.context.setCases)
         .catch(this.context.setError);
     }
-  };
+  }
 
   render() {
     const thisCase = this.context.cases.filter(el => el.case_id.toString() === this.props.match.params.case_id)[0];
     return(
       <div className='ca_box'>
         {(this.context.cases.length > 0) ? <>
-        <LoginContext.Consumer>
-          {loginContext => { return(
-            <>
-              {!loginContext.isLoggedIn ? <Redirect to='/login' /> : null }
-            </>
-          );}};
-        </LoginContext.Consumer>
         <div className='ca_item'>
           <h3 className='c_header'>{`Case ${thisCase.case_id}`}</h3>
           <h4 className='ca_subheading'>Notes</h4>
@@ -52,7 +43,7 @@ class Case extends React.Component {
                   <p>{contact.email}</p>
                 </li>
               );
-            })};
+            })}
           </ul>
         </div>
         </>: null }

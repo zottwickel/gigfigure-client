@@ -40,7 +40,7 @@ class App extends React.Component {
     return (
       <div className="App wrapper">
         <Nav {...this.state} />
-        <div className='switch'>
+        <main className='content'>
           <Switch>
             <Route
               exact path='/'
@@ -66,7 +66,7 @@ class App extends React.Component {
               render={props => <Home {...props} {...this.state} />}
             />
           </Switch>
-        </div>
+        </main>
         <Foot />
         <div className='shoe'></div>
       </div>

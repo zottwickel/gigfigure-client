@@ -68,10 +68,8 @@ class Cases extends React.Component {
 
   componentDidMount() {
     this.props.setActiveTab('cases');
-    if (this.context.isLoggedIn) {
-      this.callCases();
-      this.callContacts();
-    }
+    this.callCases();
+    this.callContacts();
   }
 
   componentWillUnmount() {

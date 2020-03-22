@@ -30,9 +30,7 @@ class Contacts extends React.Component {
 
   componentDidMount() {
     this.props.setActiveTab('contacts');
-    if (this.context.isLoggedIn) {
-      this.callContacts();
-    }
+    this.callContacts();
   }
 
   componentWillUnmount() {
